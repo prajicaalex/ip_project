@@ -1,32 +1,46 @@
-#include <string>
-#include <iostream>
-#include <algorithm>
+#include "length.h"
 
-using namespace std;
+struct unit unit;
 
-struct length{
-    double MM_TO_METER = 0.001;
-    double CM_TO_METER = 0.01;
-    double KM_TO_METER = 1000;
-    double MILE_TO_METER = 1609.344;
-    double NMI_TO_METER = 1852; // NAUTICAL MILE
-    double INCH_TO_METER = 0.0254;
-    double FOOT_TO_METER = 0.3048;
-    double YARD_TO_METER = 0.9144;
+void showLengthUnitOptions() {
+    lengthUnits u;
 
-    double factor;
-};
-
-double unitSelector(string unit){
-    // String to lowercase
-    std::transform(unit.begin(), unit.end(), unit.begin(), ::tolower);
-
-
-
+    for (int i = 0; i < u.nrOfUnits; ++i) {
+        cout << i + 1 << ". " << u.units[i] << endl;
+    }
 }
 
-double unitSelector(int unit){
+double getLengthResults(){
+    length length;
 
+    double factorFrom = length.unitToMeter[unit.option1 - 1];
+    double factorTo = length.unitToMeter[unit.option2 - 1];
+
+    double meters = toBasicUnit(unit.amount, factorFrom);
+    double converted = fromBasicUnit(meters, factorTo);
+
+    return converted;
+}
+
+void showLengthResult(){
+    lengthUnits lengthUnits;
+    double result = getLengthResults();
+    double amount = unit.amount;
+
+    showUnitResult(lengthUnits.units[unit.option1 - 1], lengthUnits.units[unit.option2 - 1], amount, result);
+}
+
+void showLengthMenu(int STEP) {
+    if(STEP == STEP2_BACK_OPTION_CODE){
+        drawLineWithMessage("CONVERT FROM");
+        showConvertFromMessage();
+    } else if(STEP == STEP3_BACK_OPTION_CODE){
+        drawLineWithMessage("CONVERT TO");
+        showConvertToMessage();
+    }
+
+
+    showLengthUnitOptions();
 }
 
 

@@ -1,5 +1,0 @@
-#define CONVERTOR_LENGTH_H
-
-#include <string>
-
-double unitSelector(std::string unit);

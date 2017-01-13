@@ -1,9 +1,0 @@
-#ifndef CONVERTOR_HELPER_H
-#define CONVERTOR_HELPER_H
-
-#endif //CONVERTOR_HELPER_H
-
-#include <string>
-using namespace std;
-
-string convertToLowercase(std::string string);
